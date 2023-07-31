@@ -56,6 +56,8 @@ function CreateBlockDrawer({showCreateBlockDrawer, setShowCreateBlockDrawer, fet
 
     useEffect(()=>{
         setSelectTrackValues(trackNumberValues);
+        setCars([]);
+        setTrackNumber(1)
     },[location])
 
     const fetchCars = (trackNumber) => {
@@ -63,14 +65,12 @@ function CreateBlockDrawer({showCreateBlockDrawer, setShowCreateBlockDrawer, fet
             .then(res=> res.json())
             .then(jsonData => setCars(jsonData));
     }
-
     const onCLose = () => {
         setSelect(false);
         setCars([]);
         setShowCreateBlockDrawer(false);
         fetchTrains();
     }
-
     function handleSearch (){
         fetchCars(trackNumber);
         setSelect(false);
@@ -84,13 +84,11 @@ function CreateBlockDrawer({showCreateBlockDrawer, setShowCreateBlockDrawer, fet
             }).catch(err =>{
                 MyException(err,"There was an issue @CarTable ");
         }).finally(()=>{
-
+            setTrackNumber(1);
         });
 
         setSelect(false);
     }
-
-
 
     const onFinish = () => {
         setSubmitting(true);
@@ -100,46 +98,56 @@ function CreateBlockDrawer({showCreateBlockDrawer, setShowCreateBlockDrawer, fet
         alert(JSON.stringify(errorInfo, null, 2));
     };
 
-    return <div>
-    <Drawer
-                title="Create Block"
-                width={1200}
-                height={800}
-                onClose={onCLose}
-                open={showCreateBlockDrawer}
-                bodyStyle={{paddingBottom: 80}}
-                placement={'left'}
 
-                footer={
-                    <div
-                        style={{
-                            textAlign: 'right',
-                        }}
-                    >
-                        <Button onClick={onCLose} style={{marginRight: 8}}>
-                            Cancel
-                        </Button>
-                    </div>
-                }
+    function trackMapper() {
+
+        return <div>
+            <select defaultValue={1}
+                    className={"custom-select"}
+                    onChange={e => setTrackNumber(e.target.value)}
+                    onLoad={e => setTrackNumber(e.target.value)}
             >
+                {
+                    selectTrackValues.map((opts) => <option>{opts.trackNum}</option>)
+                },
+
+            </select>
+
+            <Button style={{height: "40px"}}
+                    onClick={() => handleSearch()}>SEARCH</Button>
+        </div>;
+    }
+
+    return <div>
+        <Drawer
+            title="Create Block"
+            width={1200}
+            height={800}
+            onClose={onCLose}
+            open={showCreateBlockDrawer}
+            bodyStyle={{paddingBottom: 80}}
+            placement={'left'}
+            onFinish={onFinish}
+            onFinishFailed ={onFinishFailed}
+            footer={
+                <div
+                    style={{
+                        textAlign: 'right',
+                    }}
+                >
+                    <Button onClick={onCLose} style={{marginRight: 8}}>
+                        Cancel
+                    </Button>
+                </div>
+            }
+        >
             <Divider orientationMargin={0} orientation={"left"}>BLOCK FOR {trainSymbol}</Divider>
             <Divider orientationMargin={0} orientation={"left"}>SELECT TRACK</Divider>
-
-                <div  >
-                    <select  className={"custom-select"} onChange={e => setTrackNumber(e.target.value)} >
-                        {
-                            selectTrackValues.map((opts)=><option>{opts.trackNum}</option>)
-                        },
-
-                    </select>
-
-                    <Button style={{height:"40px"}}
-                            onClick={()=>handleSearch()}>SEARCH</Button>
-                </div>
-                {CarTable(trainSymbol, cars, select, setSelect, blockList, setBlockList)}
-                <Button onClick={handleSubmit} type={"primary"}>Submit</Button>
-            </Drawer>
-        </div>
+            {trackMapper()}
+            {CarTable(trainSymbol, cars, select, setSelect, blockList, setBlockList)}
+            <Button onClick={handleSubmit} type={"primary"}>Submit</Button>
+        </Drawer>
+    </div>
 }
 
 export default CreateBlockDrawer;

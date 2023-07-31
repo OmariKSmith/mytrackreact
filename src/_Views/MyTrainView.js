@@ -33,7 +33,9 @@ const MyTrainView = ()=>{
             .then(res=> res.json())
             .then(jsonData => setCars(jsonData));
     }
-
+    function open (){
+        return showCreateBlockDrawer;
+    }
     useEffect(()=>{
         fetchTrains();
     },[location])
@@ -50,7 +52,7 @@ const MyTrainView = ()=>{
             <Content style={{ margin: '16px' }}>
 
                 {CreateTrainDrawer({showDrawer, setShowDrawer,fetchTrains})}
-                {CreateBlockDrawer({showCreateBlockDrawer, setShowCreateBlockDrawer, fetchTrains,trainSymbol})}
+                {CreateBlockDrawer({showCreateBlockDrawer, setShowCreateBlockDrawer, fetchTrains,trainSymbol,open})}
 
                 <div className="carCounter" style={{ padding: 2, minHeight: 2 }}>
                     {CountBar(trains.length)}

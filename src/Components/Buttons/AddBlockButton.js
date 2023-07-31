@@ -11,7 +11,6 @@ function AddBlockButton(showDrawer, setShowDrawer,train, trainSymbol,setTrainSym
                 setTrainSymbol(train.trainSymbol);
             }
         }
-
         type="default" shape="round" icon={<PlusOutlined />} size="small" >
 
         {title}

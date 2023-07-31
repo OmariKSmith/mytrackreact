@@ -1,7 +1,8 @@
 import {Content} from "antd/lib/layout/layout";
 import BannerImage from "../Components/images/train-pictures-40.jpg";
 import {motion} from "framer-motion";
-import ProtoGrid from "./YardGrid";
+
+import YardGrid from "./YardGrid";
 const MyYardView = ()=>{
 
     return  (
@@ -16,7 +17,7 @@ const MyYardView = ()=>{
             <Content style={{ margin: '16px' }}>
                 <h1>Track Blocks</h1>
                 <div className="carTable" style={{ padding: 2, minHeight: 1}}>
-                    {ProtoGrid()}
+                    {YardGrid()}
                 </div>
 
             </Content>

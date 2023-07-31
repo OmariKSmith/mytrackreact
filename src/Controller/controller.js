@@ -18,32 +18,18 @@ export const getCarsByTrack = trackID =>
     fetch(`api/v1/getCarsByTrack/${trackID}`,{
     }).then(checkStatus);
 
-export const updateCarOutboundBlock = (trainSymbol) =>
-    fetch(`api/v1/updateCarOutboundBlock`,{
-        method: 'POST',
-        headers:{
-            'Content-Type': 'application/json'
-        },
-
-        body: JSON.stringify(trainSymbol)
-    }).then(checkStatus);
-
-
 export const createBlock = (cars, trainSymbol) =>
     fetch(`api/v1/createBlock/${trainSymbol}`,{
         method: 'POST',
         headers:{
             'Content-Type': 'application/json'
         },
-
         body: JSON.stringify(cars),
-
-
     }).then(checkStatus);
 
 
 export const getAllTrains = () =>
-    fetch("api/v1/allTrains",{})
+    fetch("api/v1/getAllTrains",{})
         .then(checkStatus);
 
 export const addTrain = train =>
@@ -52,27 +38,7 @@ export const addTrain = train =>
         headers:{
             'Content-Type': 'application/json'
         },
-
         body: JSON.stringify(train)
-    }).then(checkStatus);
-export const updateTrainLength = trainSymbol =>
-    fetch(`api/v1/updateTrainLength`,{
-        method: 'POST',
-        headers:{
-            'Content-Type': 'application/json'
-        },
-
-        body: JSON.stringify(trainSymbol)
-    }).then(checkStatus);
-
-export const updateTrain = trainSymbol =>
-    fetch(`api/v1/updateTrain`,{
-        method: 'POST',
-        headers:{
-            'Content-Type': 'application/json'
-        },
-
-        body: JSON.stringify(trainSymbol)
     }).then(checkStatus);
 
 export const deleteTrain = id =>
@@ -81,11 +47,7 @@ export const deleteTrain = id =>
     }).then(checkStatus);
 
 
-export const findBlocksByTrackId = trackID =>
-    fetch(`api/v1/findBlocksByTrackId/${trackID}`,{
-    }).then(checkStatus);
 
-export const findAllTracks = () =>
-    fetch("api/v1/findAllTracks",{})
-        .then(checkStatus);
+
+
 

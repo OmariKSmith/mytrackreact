@@ -1,10 +1,6 @@
 import {Divider, Table} from 'antd';
-import React, {useEffect, useState} from "react";
-
-
+import React, {useState} from "react";
 import {motion} from "framer-motion";
-
-
 
 function CarTable (trainSymbol, cars, select, setSelect, blockList, setBlockList){
     const [filteredInfo, setFilteredInfo] = useState(false);
@@ -82,32 +78,22 @@ function CarTable (trainSymbol, cars, select, setSelect, blockList, setBlockList
 
     const { selectedRowKeys, loading } = select;
 
-    useEffect(() => {
-
-    },[]);
-
-
     const handleChange = (_,filter) => {
         setFilteredInfo(filter);
     }
 
-
     const rowSelection = {
         selectedRowKeys,
-        onChange: (selectedRowKeys, ) => {
+        onChange: (selectedRowKeys) => {
             setSelect({
                 selectedRowKeys: selectedRowKeys
             });
         },
         onSelect:(record,selected, selectedRows)=>{
             setBlockList(selectedRows);
-
         },
 
         onSelectAll:(selected, selectedRows)=>{
-            for (let i = 0; i < selectedRows.length; i++) {
-
-            }
 
                 if(selected){
                     setBlockList(selectedRows);
@@ -117,8 +103,8 @@ function CarTable (trainSymbol, cars, select, setSelect, blockList, setBlockList
                 }
         }
     };
-    return (
 
+    return (
         <div>
             <Divider orientationMargin={0} orientation={"left"}>SELECT CARS</Divider>
             <motion.div className={"content"}
@@ -138,6 +124,5 @@ function CarTable (trainSymbol, cars, select, setSelect, blockList, setBlockList
 
         </div>
     );
-
 }
 export default CarTable;

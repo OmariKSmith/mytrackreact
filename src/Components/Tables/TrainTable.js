@@ -26,7 +26,7 @@ const TrainTable = (trains,fetchTrains, cars,setCars,  showCreateBlockDrawer,set
             title: 'DEPART YARD CODE',
             dataIndex: 'departYardCode',
             key: 'departYardCode',
-            width: 190,
+            width: 150,
             sorter: (z, b) => z.departYardCode - b.departYardCode,
         },
 
@@ -57,6 +57,13 @@ const TrainTable = (trains,fetchTrains, cars,setCars,  showCreateBlockDrawer,set
             key: 'trainLength',
             width: 150,
             sorter: (a, b) => a.trainLength.localeCompare(b.trainLength),
+        },
+        {
+            title: 'CAR_COUNT',
+            dataIndex: 'carCount',
+            key: 'carCount',
+            width: 150,
+            sorter: (a, b) => a.carCount.localeCompare(b.carCount),
         },
 
         {
